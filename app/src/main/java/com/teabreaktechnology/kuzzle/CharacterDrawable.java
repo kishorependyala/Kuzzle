@@ -53,7 +53,7 @@ public class CharacterDrawable extends ColorDrawable{
         int width = canvas.getWidth();
         int height = canvas.getHeight();
         textPaint.setTextSize(height / 2);
-        canvas.drawText(String.valueOf(character), width/3, height/3 - ((textPaint.descent() + textPaint.ascent()) / 2) , textPaint);
+        canvas.drawText(String.valueOf(character), width/2, height/2 - ((textPaint.descent() + textPaint.ascent()) / 2) , textPaint);
     }
 
     @Override

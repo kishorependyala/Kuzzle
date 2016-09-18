@@ -14,7 +14,8 @@
     <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="0.91">
+        android:layout_weight="0.91"
+        android:id="@+id/tableLayout">
 
         <TableRow
             android:layout_width="match_parent"

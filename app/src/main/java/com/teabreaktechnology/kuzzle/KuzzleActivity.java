@@ -15,7 +15,7 @@ import java.util.List;
 public class KuzzleActivity extends AppCompatActivity {
 
     int[] colorCodes = {0xff0000, 0x00ff00, 0x0000ff,0xFFFFFF,0xFFFF00,0xFF00FF};
-    char[] colors = {'R', 'G', 'B', 'W','Y','P'};
+    String[] colors = {"R", "G", "B", "W","Y","P"};
 
 
     String[] players = new String[]{"Kishore","Karthik"};
@@ -26,6 +26,7 @@ public class KuzzleActivity extends AppCompatActivity {
     List<Play> priorPlays = new ArrayList<>();
     private List<Play> priorPlayDetails;
     int[] answer = new int[]{2,1,4};
+    ArrayList<ItemData> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +46,8 @@ public class KuzzleActivity extends AppCompatActivity {
         CharacterDrawable drawable = new CharacterDrawable('A', 0xFF805781);
         image.setImageDrawable(drawable);
 
-        ArrayList<ItemData> list = new ArrayList<>();
-        for (int colorCode : colorCodes) {
-            list.add(new ItemData("", colorCode));
-        }
+
+
 
         final Spinner sp = (Spinner) findViewById(R.id.spinner);
         SpinnerAdapter adapter = new SpinnerAdapter(this,R.layout.spinner_layout, R.id.txt, list);
@@ -162,10 +161,9 @@ public class KuzzleActivity extends AppCompatActivity {
 
     public void setColoredSpinner(){
         ArrayList<ItemData> list=new ArrayList<>();
-        list.add(new ItemData("",R.drawable.r));
-        list.add(new ItemData("",R.drawable.g));
-        list.add(new ItemData("",R.drawable.b));
-
+        for (int i = 0; i < colors.length; i++) {
+            list.add(new ItemData(colors[i], colorCodes[i]));
+        }
         Spinner sp=(Spinner)findViewById(R.id.spinner);
         SpinnerAdapter adapter=new SpinnerAdapter(this,
                 R.layout.spinner_layout,R.id.txt,list);

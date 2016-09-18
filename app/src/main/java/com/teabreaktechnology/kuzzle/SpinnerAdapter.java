@@ -34,7 +34,7 @@ public class SpinnerAdapter extends ArrayAdapter<ItemData> {
 
         View itemView = inflater.inflate(groupid, parent, false);
         TextView textView = (TextView) itemView.findViewById(R.id.txt);
-        textView.setText(list.get(position).getText());
+
         /**getting the text to string
          * retriving the first letter
          * getting the color code
@@ -45,7 +45,7 @@ public class SpinnerAdapter extends ArrayAdapter<ItemData> {
         for (int i = 0; i < 1; i++)
         {
             // Get char at this index and display it.
-            //letter = s.charAt(i);
+            letter = s.charAt(i);
             //System.out.println(letter);
         }
         ImageView imageView = (ImageView) itemView.findViewById(R.id.img);
