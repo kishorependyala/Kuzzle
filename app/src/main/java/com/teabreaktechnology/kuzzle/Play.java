@@ -65,4 +65,20 @@ public class Play {
         return sb.toString();
 
     }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public int getColorOnlyMatch() {
+        return colorOnlyMatch;
+    }
+
+    public int getColorAndPosMatch() {
+        return colorAndPosMatch;
+    }
+
+    public int[] getSelectedColors() {
+        return selectedColors;
+    }
 }
