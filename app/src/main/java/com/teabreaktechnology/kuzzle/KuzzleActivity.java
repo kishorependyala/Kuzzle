@@ -40,18 +40,6 @@ public class KuzzleActivity extends AppCompatActivity {
         }
         setColoredSpinner();
         setOnClickListner();
-
-
-        ImageView image = (ImageView) findViewById(R.id.imageView);
-        CharacterDrawable drawable = new CharacterDrawable('A', 0xFF805781);
-        image.setImageDrawable(drawable);
-
-
-
-
-        final Spinner sp = (Spinner) findViewById(R.id.spinner);
-        SpinnerAdapter adapter = new SpinnerAdapter(this,R.layout.spinner_layout, R.id.txt, list);
-
     }
 
     private void setOnClickListner() {
