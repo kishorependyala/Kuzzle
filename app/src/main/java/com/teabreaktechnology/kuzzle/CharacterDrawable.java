@@ -10,12 +10,12 @@ import android.graphics.drawable.ColorDrawable;
 /**
  * Created by nikil on 26-Jul-16.
  */
-public class CharacterDrawable extends ColorDrawable{
+public class CharacterDrawable extends ColorDrawable {
+    private static final int STROKE_WIDTH = 1000;
+    private static final float SHADE_FACTOR = 0.9f;
     private final char character;
     private final Paint textPaint;
     private final Paint borderPaint;
-    private static final int STROKE_WIDTH = 1000;
-    private static final float SHADE_FACTOR = 0.9f;
 
     public CharacterDrawable(char character, int color) {
         super(color);
@@ -37,9 +37,9 @@ public class CharacterDrawable extends ColorDrawable{
     }
 
     private int getDarkerShade(int color) {
-        return Color.rgb((int)(SHADE_FACTOR * Color.red(color)),
-                (int)(SHADE_FACTOR * Color.green(color)),
-                (int)(SHADE_FACTOR * Color.blue(color)));
+        return Color.rgb((int) (SHADE_FACTOR * Color.red(color)),
+                (int) (SHADE_FACTOR * Color.green(color)),
+                (int) (SHADE_FACTOR * Color.blue(color)));
     }
 
     @Override
@@ -53,7 +53,7 @@ public class CharacterDrawable extends ColorDrawable{
         int width = canvas.getWidth();
         int height = canvas.getHeight();
         textPaint.setTextSize(height / 2);
-        canvas.drawText(String.valueOf(character), width/2, height/2 - ((textPaint.descent() + textPaint.ascent()) / 2) , textPaint);
+        canvas.drawText(String.valueOf(character), width / 2, height / 2 - ((textPaint.descent() + textPaint.ascent()) / 2), textPaint);
     }
 
     @Override

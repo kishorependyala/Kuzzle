@@ -15,42 +15,41 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/pn"
-            android:layout_width="60dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
+            android:id="@+id/currentPlayer"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:text="player name"
             android:textColor="#000000" />
 
         <TextView
-            android:id="@+id/colorOnly"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:text="1" />
+            android:text=" " />
 
-        <ImageView
-            android:id="@+id/img1"
-            android:layout_width="30dp"
-            android:layout_height="30dp"/>
 
-        <ImageView
-            android:id="@+id/img2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"/>
+        <Spinner
+            android:id="@+id/color1"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
 
-        <ImageView
-            android:id="@+id/img3"
-            android:layout_width="30dp"
-            android:layout_height="30dp" />
+        <Spinner
+            android:id="@+id/color2"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <Spinner
+            android:id="@+id/color3"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
 
 
         <TextView
-            android:id="@+id/colorAndPos"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:text="1" />
+            android:text=" " />
     </TableRow>
+
 
 </LinearLayout>

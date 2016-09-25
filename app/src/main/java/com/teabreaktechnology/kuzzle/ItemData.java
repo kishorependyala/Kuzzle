@@ -1,8 +1,5 @@
 package com.teabreaktechnology.kuzzle;
 
-/**
- * Created by nikil on 25-Jul-16.
- */
 public class ItemData {
     String text;
     Integer imageId;

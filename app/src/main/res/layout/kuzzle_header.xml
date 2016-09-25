@@ -7,9 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.teabreaktechnology.kuzzle.KuzzleActivity2"
-    android:weightSum="1">
-
+    android:weightSum="1"
+    tools:context="com.teabreaktechnology.kuzzle.KuzzleActivity2">
 
 
     <TableRow
@@ -19,28 +18,27 @@
         <TextView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:text="Player Name"/>
+            android:text="Player Name" />
 
         <TextView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:text="Colors Only Match"/>
+            android:text="Colors Only Match" />
 
         <TextView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:text="First"/>
+            android:text="First" />
 
         <TextView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:text="Second"/>
+            android:text="Second" />
 
         <TextView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:text="Third"/>
-
+            android:text="Third" />
 
 
         <TextView

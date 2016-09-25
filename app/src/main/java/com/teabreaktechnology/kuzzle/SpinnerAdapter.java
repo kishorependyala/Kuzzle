@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class SpinnerAdapter extends ArrayAdapter<ItemData> {
     int groupid;
-    char letter =' ';
+    char letter = ' ';
     int color;
     Activity context;
     ArrayList<ItemData> list;
@@ -35,23 +35,14 @@ public class SpinnerAdapter extends ArrayAdapter<ItemData> {
         View itemView = inflater.inflate(groupid, parent, false);
         TextView textView = (TextView) itemView.findViewById(R.id.txt);
 
-        /**getting the text to string
-         * retriving the first letter
-         * getting the color code
-         * retriving the color code
-         * implement in CharacterDrawable
-         **/
         String s = list.get(position).getText().toString();
-        for (int i = 0; i < 1; i++)
-        {
-            // Get char at this index and display it.
+        for (int i = 0; i < 1; i++) {
             letter = s.charAt(i);
-            //System.out.println(letter);
         }
         ImageView imageView = (ImageView) itemView.findViewById(R.id.img);
         color = list.get(position).getImageId();
         System.out.println(color);
-        CharacterDrawable drawable = new CharacterDrawable(letter,color);
+        CharacterDrawable drawable = new CharacterDrawable(letter, color);
         imageView.setImageDrawable(drawable);
 
         return itemView;
