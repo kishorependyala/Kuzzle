@@ -27,7 +27,7 @@ public class GameState {
     public GameState() {
 
         players.add("Kishore");
-        players.add("Karthik");
+        players.add("Nanda");
         playerLimit = 2;
         plays = mockPlays();
         colors = mockColors();

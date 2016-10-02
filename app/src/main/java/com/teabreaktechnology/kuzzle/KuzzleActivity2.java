@@ -25,8 +25,10 @@ public class KuzzleActivity2 extends AppCompatActivity {
 
     int[] answer = new int[]{1, 2, 3};
     GameState gameState;
+    int myPlayerId = 0;
 
     DatabaseReference game1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -49,7 +51,6 @@ public class KuzzleActivity2 extends AppCompatActivity {
 
             }
         });
-
 
         setContentView(R.layout.activity_kuzzle2);
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -131,7 +132,10 @@ public class KuzzleActivity2 extends AppCompatActivity {
                 gameState.addPlay(play);
                 Integer spinnerIndex = gameState.getSpinnerIndex();
                 mainView.removeViewAt(spinnerIndex);
+                gameState.setNextPlayer();
+
                 game1.setValue(gameState.getFullState());
+
                 setNextPlay(inflater, mainView, gameState);
 
             }
@@ -145,9 +149,12 @@ public class KuzzleActivity2 extends AppCompatActivity {
         View rowView = inflater.inflate(R.layout.kuzzle_row2, null);
         mainView.addView(rowView, spinnerIndex);
         fill(rowView, previousPlay, gameState.imageIds(), gameState.getColorCodes(), gameState.getColors());
-        createColoredSpinner(inflater, mainView, gameState);
-        gameState.setNextPlayer();
+
+        if(gameState.getCurrentPlayer()==myPlayerId) {
+            createColoredSpinner(inflater, mainView, gameState);
+        }
         setPlayerDetailsText(gameState);
+
     }
 
     private void setPlayerDetailsText(GameState gameState) {
