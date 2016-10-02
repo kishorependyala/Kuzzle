@@ -37,6 +37,12 @@ public class GameState {
 
 
     }
+    public void decrementAndGet(int playerId){
+        Integer integer = playerIndex.get(playerId);
+        if(integer!=null) {
+            playerIndex.put(playerId, --integer);
+        }
+    }
 
     public Integer getAndIncrement(int playerId) {
         Integer integer = playerIndex.get(playerId);
@@ -117,13 +123,19 @@ public class GameState {
     }
 
     public Integer setNextPlayer() {
+        Integer nextPlayerId = nextPlayer();
+        currentPlayer = nextPlayerId;
+        return nextPlayerId;
+    }
+
+    @NonNull
+    private Integer nextPlayer() {
         Integer nextPlayerId;
         if (getCurrentPlayer() == 0) {
             nextPlayerId = 1;
         } else {
             nextPlayerId = 0;
         }
-        currentPlayer = nextPlayerId;
         return nextPlayerId;
     }
 
@@ -131,7 +143,7 @@ public class GameState {
     private List<Play> mockPlays() {
         List<Play> plays = new ArrayList<>();
         //plays.add(new Play.Builder().playerName("Player Name").colorOnlyMatch(1).selectedColors(new int[]{1,2,3}).colorAndPosMatch(1).build());
-        plays.add(new Play.Builder().playerName("Kishore").colorOnlyMatch(0).selectedColors(new int[]{1, 2, 3}).colorAndPosMatch(0).build());
+        plays.add(new Play.Builder().playerName("Kishore").colorOnlyMatch(0).selectedColors(new int[]{1, 1, 1}).colorAndPosMatch(0).build());
         //plays.add(new Play.Builder().playerName("Karthik").colorOnlyMatch(2).selectedColors(new int[]{4, 0, 5}).colorAndPosMatch(2).build());
         //plays.add(new Play.Builder().playerName("Kishore").colorOnlyMatch(2).selectedColors(new int[]{1, 4, 5}).colorAndPosMatch(1).build());
         return plays;
@@ -160,25 +172,30 @@ public class GameState {
         }
         List<Object> playObjs = (ArrayList)state.get("plays");
         this.plays = new ArrayList<>();
-        for(Object playObj: playObjs){
-            Map hashMap = (HashMap) playObj;
-            String playerName = (String)hashMap.get("playerName");
-            Integer colorOnlyMatch = ((Long)hashMap.get("colorOnlyMatch")).intValue();
-            Integer colorAndPosMatch = ((Long)hashMap.get("colorAndPosMatch")).intValue();
-            List selectedColorsObj = (ArrayList)hashMap.get("selectedColors");
-            plays.add(new Play.Builder()
-                    .playerName(playerName)
-                    .colorOnlyMatch(colorOnlyMatch)
-                    .selectedColorsFromObj(selectedColorsObj)
-                    .colorAndPosMatch(colorAndPosMatch)
-                    .build());
+        if(playObjs!=null) {
+            for (Object playObj : playObjs) {
+                Map hashMap = (HashMap) playObj;
+                String playerName = (String) hashMap.get("playerName");
+                Integer colorOnlyMatch = ((Long) hashMap.get("colorOnlyMatch")).intValue();
+                Integer colorAndPosMatch = ((Long) hashMap.get("colorAndPosMatch")).intValue();
+                List selectedColorsObj = (ArrayList) hashMap.get("selectedColors");
+                plays.add(new Play.Builder()
+                        .playerName(playerName)
+                        .colorOnlyMatch(colorOnlyMatch)
+                        .selectedColorsFromObj(selectedColorsObj)
+                        .colorAndPosMatch(colorAndPosMatch)
+                        .build());
 
 
+            }
         }
 
     }
 
     public Play getLastPlay() {
+        if(plays.isEmpty()){
+            return new Play.Builder().build();
+        }
         return plays.get(plays.size() - 1);
     }
 }
