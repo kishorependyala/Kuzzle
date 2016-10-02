@@ -23,9 +23,11 @@ public class GameState {
     Integer playerLimit = 2;
     List<String> colors = new ArrayList<>();
     Integer spinnerIndex = 0;
+    Integer myPlayerId;
 
-    public GameState(int currentPlayer) {
-        this.currentPlayer = currentPlayer;
+    public GameState(int myPlayerId) {
+        this.myPlayerId = myPlayerId;
+        this.currentPlayer = 0;
         players.add("Kishore");
         players.add("Nanda");
         playerLimit = 2;
@@ -44,6 +46,9 @@ public class GameState {
         return viewIndex--;
     }
 
+    public Integer getMyPlayerId() {
+        return myPlayerId;
+    }
 
     @NonNull
     public static List<String> mockColors() {
