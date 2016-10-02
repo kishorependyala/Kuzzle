@@ -39,9 +39,7 @@ public class KuzzleActivity2 extends AppCompatActivity {
         newGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setContentView(R.layout.activity_kuzzle2);
-                newGame.setVisibility(View.INVISIBLE);
-                start();
+             onCreate(new Bundle());
             }
         });
         start();
@@ -185,15 +183,16 @@ public class KuzzleActivity2 extends AppCompatActivity {
 
         Play previousPlay = gameState.getLastPlay();
 
-        if(previousPlay.getColorAndPosMatch()==3){
-            ((Button) findViewById(R.id.newGame)).setVisibility(View.VISIBLE);
-        }else {
+
             Integer viewIndex = gameState.getAndIncrement(gameState.getMyPlayerId());
             View rowView = inflater.inflate(R.layout.kuzzle_row2, null);
             System.out.println("spinnerIndex ===" + viewIndex);
             mainView.addView(rowView, viewIndex);
             fill(rowView, previousPlay, gameState.imageIds(), gameState.getColorCodes(), gameState.getColors());
 
+        if(previousPlay.getColorAndPosMatch()==3){
+            ((Button) findViewById(R.id.newGame)).setVisibility(View.INVISIBLE);
+        }else {
             if (gameState.getCurrentPlayer() == gameState.getMyPlayerId()) {
                 createColoredSpinner(inflater, mainView, gameState);
                 setPlayerDetailsText(gameState);
