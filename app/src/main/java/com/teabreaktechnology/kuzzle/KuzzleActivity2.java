@@ -33,9 +33,12 @@ public class KuzzleActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        gameState = new GameState();
+        gameState = new GameState(myPlayerId);
         game1 = FirebaseDatabase.getInstance().getReference()
                 .child("game1");
+        final LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        final TableLayout mainView = (TableLayout) findViewById(R.id.mainView);
 
         game1.addValueEventListener(new ValueEventListener() {
             @Override
@@ -44,6 +47,8 @@ public class KuzzleActivity2 extends AppCompatActivity {
                 Map<String, Object> value1 = (Map<String, Object>) value;
                 gameState.set(value1);
                 System.out.println(value);
+                setNextPlay(inflater, mainView, gameState);
+
             }
 
             @Override
@@ -53,8 +58,7 @@ public class KuzzleActivity2 extends AppCompatActivity {
         });
 
         setContentView(R.layout.activity_kuzzle2);
-        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        TableLayout mainView = (TableLayout) findViewById(R.id.mainView);
+
         addHeader(inflater, mainView, gameState);
         fillPlays(inflater, mainView, gameState);
         createColoredSpinner(inflater, mainView, gameState);
@@ -152,8 +156,9 @@ public class KuzzleActivity2 extends AppCompatActivity {
 
         if(gameState.getCurrentPlayer()==myPlayerId) {
             createColoredSpinner(inflater, mainView, gameState);
+            setPlayerDetailsText(gameState);
         }
-        setPlayerDetailsText(gameState);
+
 
     }
 

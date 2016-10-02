@@ -16,7 +16,7 @@ public class GameState {
 
 
     List<String> players = new ArrayList<>();
-    Integer currentPlayer = 0;
+    Integer currentPlayer;
     Integer viewIndex = 0;
     List<Integer> colorCodes = new ArrayList<>();
     List<Play> plays = new ArrayList<>();
@@ -24,8 +24,8 @@ public class GameState {
     List<String> colors = new ArrayList<>();
     Integer spinnerIndex = 0;
 
-    public GameState() {
-
+    public GameState(int currentPlayer) {
+        this.currentPlayer = currentPlayer;
         players.add("Kishore");
         players.add("Nanda");
         playerLimit = 2;
@@ -152,7 +152,6 @@ public class GameState {
         for(Long colorCode: colorCodes){
             this.colorCodes.add(colorCode.intValue());
         }
-
         Long viewIndexLong = (Long) state.get("viewIndex");
         this.viewIndex = viewIndexLong.intValue();
         List<Object> playObjs = (ArrayList)state.get("plays");
