@@ -32,12 +32,12 @@
         <ImageView
             android:id="@+id/img1"
             android:layout_width="30dp"
-            android:layout_height="30dp"/>
+            android:layout_height="30dp" />
 
         <ImageView
             android:id="@+id/img2"
             android:layout_width="30dp"
-            android:layout_height="30dp"/>
+            android:layout_height="30dp" />
 
         <ImageView
             android:id="@+id/img3"

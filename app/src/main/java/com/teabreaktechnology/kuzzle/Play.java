@@ -1,16 +1,18 @@
 package com.teabreaktechnology.kuzzle;
 
-import java.util.Arrays;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by kishorekpendyala on 7/24/16.
  */
-public class Play {
+public class Play implements Serializable {
 
     private String playerName;
     private int colorOnlyMatch;
     private int colorAndPosMatch;
-    private int selectedColors[];
+    private List<Integer> selectedColors;
 
     public Play(Builder builder) {
         this.playerName = builder.playerName;
@@ -24,8 +26,8 @@ public class Play {
         StringBuilder sb = new StringBuilder();
         sb.append(playerName).append(" ");
         sb.append(colorOnlyMatch).append(" ");
-        for (int selectedColor : selectedColors) {
-            sb.append(Constants.colors[selectedColor]).append(" ");
+        for (Integer selectedColor : selectedColors) {
+            sb.append(GameState.mockColors().get(selectedColor)).append(" ");
 
         }
         sb.append(colorAndPosMatch).append(" ");
@@ -46,7 +48,7 @@ public class Play {
         return colorAndPosMatch;
     }
 
-    public int[] getSelectedColors() {
+    public List<Integer> getSelectedColors() {
         return selectedColors;
     }
 
@@ -55,7 +57,7 @@ public class Play {
         private String playerName;
         private int colorOnlyMatch;
         private int colorAndPosMatch;
-        private int selectedColors[];
+        private List<Integer> selectedColors = new ArrayList<>();
 
         public Builder playerName(String playerName) {
             this.playerName = playerName;
@@ -73,12 +75,22 @@ public class Play {
         }
 
         public Builder selectedColors(int[] selectedColors) {
-            this.selectedColors = Arrays.copyOf(selectedColors, selectedColors.length);
+            for(int color: selectedColors){
+                this.selectedColors.add(color);
+            }
             return this;
         }
 
         public Play build() {
             return new Play(this);
+        }
+
+        public Builder selectedColorsFromObj(List selectedColorsObj) {
+            for(Object selectedColorObj : selectedColorsObj){
+                Long selectedColor = (Long) selectedColorObj;
+                this.selectedColors.add(selectedColor.intValue());
+            }
+            return this;
         }
     }
 }

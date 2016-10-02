@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "834566887069",
+    "firebase_url": "https://kuzzle-b284e.firebaseio.com",
+    "project_id": "kuzzle-b284e",
+    "storage_bucket": "kuzzle-b284e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834566887069:android:59b051f374726831",
+        "android_client_info": {
+          "package_name": "com.teabreaktechnology.kuzzle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "834566887069-otbfsbi8boa8fdof7ulumscq8fjv1er2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmfOQ1Z6l9WSU9hNGYoMh3-HysKJqO0-0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
