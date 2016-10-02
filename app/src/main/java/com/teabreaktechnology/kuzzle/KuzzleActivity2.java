@@ -25,7 +25,6 @@ public class KuzzleActivity2 extends AppCompatActivity {
 
     int[] answer = new int[]{1, 2, 3};
     GameState gameState;
-    int myPlayerId = 0;
 
     DatabaseReference game1;
 
@@ -33,7 +32,7 @@ public class KuzzleActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        gameState = new GameState(myPlayerId);
+        gameState = new GameState(1);
         game1 = FirebaseDatabase.getInstance().getReference()
                 .child("game1");
         setContentView(R.layout.activity_kuzzle2);
@@ -59,11 +58,9 @@ public class KuzzleActivity2 extends AppCompatActivity {
             }
         });
 
-
-
         addHeader(inflater, mainView, gameState);
         fillPlays(inflater, mainView, gameState);
-        if(myPlayerId==gameState.getCurrentPlayer()) {
+        if(gameState.getMyPlayerId()==gameState.getCurrentPlayer()) {
             createColoredSpinner(inflater, mainView, gameState);
         }
         setOnClickListner(inflater, mainView, gameState);
@@ -73,9 +70,9 @@ public class KuzzleActivity2 extends AppCompatActivity {
 
     private void createColoredSpinner(LayoutInflater inflater, TableLayout mainView, GameState gameState) {
         View rowView = inflater.inflate(R.layout.kuzzle_spinner_3, null);
-        Integer index = gameState.getAndIncrement();
-        gameState.setSpinnerIndex(index);
-        mainView.addView(rowView, gameState.getSpinnerIndex());
+        Integer index = gameState.getAndIncrement(gameState.getMyPlayerId());
+        gameState.setSpinnerIndex(gameState.getMyPlayerId(), index);
+        mainView.addView(rowView, gameState.getSpinnerIndex(gameState.getMyPlayerId()));
         ArrayList<ItemData> list = new ArrayList<>();
         List colors = gameState.getColors();
         List colorCodes = gameState.getColorCodes();
@@ -99,14 +96,16 @@ public class KuzzleActivity2 extends AppCompatActivity {
 
     private void fillPlays(LayoutInflater inflater, TableLayout mainView, GameState gameState) {
         for (Play play : gameState.getPlays()) {
+
+
             View rowView = inflater.inflate(R.layout.kuzzle_row2, null);
-            mainView.addView(rowView, gameState.getAndIncrement());
+            mainView.addView(rowView, gameState.getAndIncrement(gameState.getMyPlayerId()));
             fill(rowView, play, gameState.imageIds(), gameState.getColorCodes(), gameState.getColors());
         }
     }
 
     private void addHeader(LayoutInflater inflater, TableLayout mainView, GameState gameState) {
-        mainView.addView(inflater.inflate(R.layout.kuzzle_header, null), gameState.getAndIncrement());
+        mainView.addView(inflater.inflate(R.layout.kuzzle_header, null), gameState.getAndIncrement(gameState.getMyPlayerId()));
     }
 
     private void fill(View rowView, Play play, int[] imageIds, List<Integer> colorCodes, List<String> colorCharacters) {
@@ -138,13 +137,13 @@ public class KuzzleActivity2 extends AppCompatActivity {
                 int[] selectedColors = readColors(gameState);
                 Play play = scoreThePlay(gameState.getCurrentPlayerName(), selectedColors, answer);
                 gameState.addPlay(play);
-                Integer spinnerIndex = gameState.getSpinnerIndex();
+                Integer spinnerIndex = gameState.getSpinnerIndex(gameState.getMyPlayerId());
                 mainView.removeViewAt(spinnerIndex);
                 gameState.setNextPlayer();
 
                 game1.setValue(gameState.getFullState());
 
-                setNextPlay(inflater, mainView, gameState);
+                //setNextPlay(inflater, mainView, gameState);
 
             }
         });
@@ -153,12 +152,12 @@ public class KuzzleActivity2 extends AppCompatActivity {
 
     private void setNextPlay(LayoutInflater inflater, TableLayout mainView, GameState gameState) {
         Play previousPlay = gameState.getLastPlay();
-        Integer spinnerIndex = gameState.getSpinnerIndex();
+        Integer spinnerIndex = gameState.getSpinnerIndex(gameState.getMyPlayerId());
         View rowView = inflater.inflate(R.layout.kuzzle_row2, null);
         mainView.addView(rowView, spinnerIndex);
         fill(rowView, previousPlay, gameState.imageIds(), gameState.getColorCodes(), gameState.getColors());
 
-        if(gameState.getCurrentPlayer()==myPlayerId) {
+        if(gameState.getCurrentPlayer() ==gameState.getMyPlayerId()) {
             createColoredSpinner(inflater, mainView, gameState);
             setPlayerDetailsText(gameState);
         }

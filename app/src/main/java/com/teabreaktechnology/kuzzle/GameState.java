@@ -17,13 +17,13 @@ public class GameState {
 
     List<String> players = new ArrayList<>();
     Integer currentPlayer;
-    Integer viewIndex = 0;
     List<Integer> colorCodes = new ArrayList<>();
     List<Play> plays = new ArrayList<>();
     Integer playerLimit = 2;
     List<String> colors = new ArrayList<>();
-    Integer spinnerIndex = 0;
     Integer myPlayerId;
+    Map<Integer,Integer> playerIndex = new HashMap<>();
+    Map<Integer,Integer> spinnerIndex = new HashMap<>();
 
     public GameState(int myPlayerId) {
         this.myPlayerId = myPlayerId;
@@ -38,13 +38,16 @@ public class GameState {
 
     }
 
-    public Integer getAndIncrement() {
-        return viewIndex++;
+    public Integer getAndIncrement(int playerId) {
+        Integer integer = playerIndex.get(playerId);
+        if(integer==null){
+           integer=0;
+           playerIndex.put(playerId, integer);
+        }
+        playerIndex.put(playerId, integer+1);
+        return integer;
     }
 
-    public Integer getAndDecrement() {
-        return viewIndex--;
-    }
 
     public Integer getMyPlayerId() {
         return myPlayerId;
@@ -89,8 +92,6 @@ public class GameState {
         state.put("plays", plays);
         state.put("colors", colors);
         state.put("colorCodes", colorCodes);
-        state.put("viewIndex", viewIndex);
-        state.put("spinnerIndex",spinnerIndex);
 
         return state;
     }
@@ -107,12 +108,12 @@ public class GameState {
         return  colors;
     }
 
-    public Integer getSpinnerIndex() {
-        return spinnerIndex;
+    public Integer getSpinnerIndex(Integer playerId) {
+        return spinnerIndex.get(playerId);
     }
 
-    public void setSpinnerIndex(Integer spinnerIndex) {
-        this.spinnerIndex = spinnerIndex;
+    public void setSpinnerIndex(Integer playerId, Integer spinnerIndex) {
+        this.spinnerIndex.put(playerId, spinnerIndex);
     }
 
     public Integer setNextPlayer() {
@@ -157,8 +158,6 @@ public class GameState {
         for(Long colorCode: colorCodes){
             this.colorCodes.add(colorCode.intValue());
         }
-        Long viewIndexLong = (Long) state.get("viewIndex");
-        this.viewIndex = viewIndexLong.intValue();
         List<Object> playObjs = (ArrayList)state.get("plays");
         this.plays = new ArrayList<>();
         for(Object playObj: playObjs){
