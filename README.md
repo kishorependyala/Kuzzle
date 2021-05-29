@@ -1,3 +1,4 @@
 # Kuzzle
 
-Kishore's edit
+Masterminds app for Android mobile.
+
